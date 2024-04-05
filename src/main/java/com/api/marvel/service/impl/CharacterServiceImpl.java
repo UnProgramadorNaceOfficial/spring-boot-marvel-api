@@ -4,6 +4,7 @@ import com.api.marvel.controller.dto.CharacterDTO;
 import com.api.marvel.controller.dto.CharacterInfoDTO;
 import com.api.marvel.persistence.CharacterRepository;
 import com.api.marvel.service.CharacterService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
