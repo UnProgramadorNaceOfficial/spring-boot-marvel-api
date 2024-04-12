@@ -34,18 +34,13 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
-                .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> {
 
                     /* Define the public endpoints */
-                    // Endpoint para registrarse
-                    // Endpoint para iniciar sesion
+                    request.requestMatchers(HttpMethod.GET, "/auth/log-in").permitAll();
 
                     /* Define the private endpoints */
-//                    request.requestMatchers(HttpMethod.GET, "/character/find").hasAuthority("READ_CHARACTER");
-//                    request.requestMatchers(HttpMethod.GET, "/character/find/{characterId}").hasAuthority("READ_CHARACTER");
-
                     request.requestMatchers(HttpMethod.GET, "/character/find").hasAnyRole("ADMIN", "USER");
                     request.requestMatchers(HttpMethod.GET, "/character/find/{characterId}").hasRole("ADMIN");
 
