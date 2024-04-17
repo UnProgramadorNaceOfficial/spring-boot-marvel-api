@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> {
 
                     /* Define the public endpoints */
-                    request.requestMatchers(HttpMethod.GET, "/auth/log-in").permitAll();
+                    request.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
 
                     /* Define the private endpoints */
                     request.requestMatchers(HttpMethod.GET, "/character/find").hasAnyRole("ADMIN", "USER");
