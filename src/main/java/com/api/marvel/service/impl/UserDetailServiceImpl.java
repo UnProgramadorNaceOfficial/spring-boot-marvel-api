@@ -9,9 +9,12 @@ import com.api.marvel.persistence.repository.RoleRepository;
 import com.api.marvel.persistence.repository.UserRepository;
 import com.api.marvel.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -105,11 +108,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
         List<String> roleRequest = authCreateUserRequest.authCreateRoleRequest().roleListName();
 
         Set<RoleEntity> roleEntitySet;
-        try{
+        try {
             roleEntitySet = roleRepository.findRoles(roleRequest)
                     .stream()
                     .collect(Collectors.toSet());
-        }catch (InvalidDataAccessApiUsageException e){
+        } catch (InvalidDataAccessApiUsageException e) {
             throw new IllegalArgumentException("Los roles suministrados no existen");
         }
 
@@ -144,5 +147,16 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         AuthResponse authResponse = new AuthResponse(username, "Usuario creado correctamente", accessToken, true);
         return authResponse;
+    }
+
+    public String getUserLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if( !(authentication instanceof UsernamePasswordAuthenticationToken) ){
+            throw new AuthenticationCredentialsNotFoundException("Se requiere autenticación completa");
+        }
+
+        UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
+        return authToken.getPrincipal().toString();
     }
 }
