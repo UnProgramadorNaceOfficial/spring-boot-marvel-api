@@ -5,6 +5,7 @@ import com.api.marvel.controller.dto.CharacterInfoDTO;
 import com.api.marvel.service.CharacterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class CharacterController {
     }
 
     @GetMapping("/find")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<CharacterDTO>> findCharacters(@RequestParam(required = false) String name,
                                                              @RequestParam(required = false) int[] comics,
                                                              @RequestParam(required = false) int[] series,
@@ -30,6 +32,7 @@ public class CharacterController {
     }
 
     @GetMapping("/find/{characterId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<CharacterInfoDTO> findCharacterById(@PathVariable Long characterId){
         return new ResponseEntity<>(this.characterService.findCharacterById(characterId), HttpStatus.OK);
     }

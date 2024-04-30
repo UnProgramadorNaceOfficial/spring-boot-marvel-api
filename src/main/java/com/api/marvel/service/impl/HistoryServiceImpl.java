@@ -1,9 +1,8 @@
 package com.api.marvel.service.impl;
 
 import com.api.marvel.controller.dto.HistoricDTO;
-import com.api.marvel.persistence.entity.HistoryEntity;
 import com.api.marvel.persistence.repository.HistoryRepository;
-import com.api.marvel.service.HistoryService;
+import com.api.marvel.service.IHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,42 +10,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class HistoryServiceImpl implements HistoryService {
+public class HistoryServiceImpl implements IHistoryService {
 
     @Autowired
     private HistoryRepository historyRepository;
 
     @Override
     public List<HistoricDTO> findAll() {
-        return this.historyRepository.findAll()
+        return historyRepository.findAll()
                 .stream()
-                .map(history -> {
-                    return new HistoricDTO(
-                            history.getId(),
-                            history.getUrl(),
-                            history.getHttpMethod(),
-                            history.getUsername(),
-                            history.getTimestamp(),
-                            history.getRemoteAddress()
-                    );
-                })
+                .map(entity -> new HistoricDTO(
+                        entity.getId(),
+                        entity.getUrl(),
+                        entity.getHttpMethod(),
+                        entity.getUsername(),
+                        entity.getTimestamp(),
+                        entity.getRemoteAddress()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public HistoricDTO findById(Long id) {
-        HistoryEntity historyEntity = this.historyRepository.findById(id).orElseGet(() -> null);
-
-        if (historyEntity == null) {
-            return new HistoricDTO(null, null, null, null, null, null);
-        }
-
-        return new HistoricDTO(
-                historyEntity.getId(),
-                historyEntity.getUrl(),
-                historyEntity.getHttpMethod(),
-                historyEntity.getUsername(),
-                historyEntity.getTimestamp(),
-                historyEntity.getRemoteAddress());
+    public List<HistoricDTO> findByName(String username) {
+        return historyRepository.findHistoryEntitiesByUsername(username)
+                .stream()
+                .map(entity -> new HistoricDTO(
+                        entity.getId(),
+                        entity.getUrl(),
+                        entity.getHttpMethod(),
+                        entity.getUsername(),
+                        entity.getTimestamp(),
+                        entity.getRemoteAddress()))
+                .collect(Collectors.toList());
     }
 }

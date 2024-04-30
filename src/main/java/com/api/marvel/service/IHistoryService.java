@@ -4,7 +4,7 @@ import com.api.marvel.controller.dto.HistoricDTO;
 
 import java.util.List;
 
-public interface HistoryService {
+public interface IHistoryService {
     List<HistoricDTO> findAll();
-    HistoricDTO findById(Long id);
+    List<HistoricDTO> findByName(String username);
 }
