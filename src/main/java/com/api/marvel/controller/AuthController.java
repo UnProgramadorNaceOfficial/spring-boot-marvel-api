@@ -4,6 +4,7 @@ import com.api.marvel.controller.dto.AuthCreateUserRequest;
 import com.api.marvel.controller.dto.AuthLoginRequest;
 import com.api.marvel.controller.dto.AuthResponse;
 import com.api.marvel.service.impl.UserDetailServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Authentication", description = "Controller to perform Authentication")
 @RestController
 @RequestMapping("/auth")
 @PreAuthorize("permitAll()")

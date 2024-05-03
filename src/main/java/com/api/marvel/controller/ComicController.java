@@ -2,6 +2,7 @@ package com.api.marvel.controller;
 
 import com.api.marvel.controller.dto.ComicDTO;
 import com.api.marvel.service.ComicService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author Santiago Perez
  */
+@Tag(name = "Comics", description = "Controller to work with Comics")
 @RestController
 @RequestMapping("/comic")
 public class ComicController {

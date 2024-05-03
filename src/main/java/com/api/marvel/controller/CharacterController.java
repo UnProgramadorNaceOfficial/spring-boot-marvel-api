@@ -3,6 +3,7 @@ package com.api.marvel.controller;
 import com.api.marvel.controller.dto.CharacterDTO;
 import com.api.marvel.controller.dto.CharacterInfoDTO;
 import com.api.marvel.service.CharacterService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Characters", description = "Controller to work with Characters")
 @RestController
 @RequestMapping("/character")
 public class CharacterController {

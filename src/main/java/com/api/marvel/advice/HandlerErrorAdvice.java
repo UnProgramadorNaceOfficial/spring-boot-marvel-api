@@ -23,7 +23,6 @@ public class HandlerErrorAdvice extends ResponseEntityExceptionHandler {
             Map<String, Object> response = new HashMap<>();
             response.put("Message", exception.getMessage());
             response.put("status", HttpStatus.FORBIDDEN.value());
-            response.put("prueba", "prueba excepcion");
 
             return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
 
@@ -31,7 +30,6 @@ public class HandlerErrorAdvice extends ResponseEntityExceptionHandler {
             Map<String, Object> response = new HashMap<>();
             response.put("Message", exception.getMessage());
             response.put("status", HttpStatus.UNAUTHORIZED.value());
-            response.put("prueba2", "prueba excepcion");
 
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
@@ -42,7 +40,6 @@ public class HandlerErrorAdvice extends ResponseEntityExceptionHandler {
         Map<String, Object> response = new HashMap<>();
         response.put("Message", exception.getMessage());
         response.put("status", HttpStatus.UNAUTHORIZED.value());
-        response.put("detail", "The token is invalid");
 
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
