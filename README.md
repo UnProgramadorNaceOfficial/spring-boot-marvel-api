@@ -5,8 +5,6 @@
 ## Descripción
 Este proyecto **tiene como objetivo mostrar cómo se evaluan las habilidades de un desarrollador en la implementación de APIs, el manejo de bases de datos y la autenticación de usuarios** y este proyecto es una aplicación que interactúa con la API de Marvel para obtener información sobre personajes y cómics. A continuación, se proporciona una descripción general de las principales componentes y funcionalidades del proyecto.
 
-- Documento de prueba técnica: [click aquí](./src/main/resources/static/Prueba.docx)
-
 ## Características
 El proyecto de prueba técnica para desarrollador backend consiste en el desarrollo de una API **con tecnología Java utilizando el framework Spring Boot**. Esta API tiene como objetivo consumir la API de Marvel, cuya documentación se encuentra en **[este enlace](https://developer.marvel.com/)**. A continuación, se detallan las principales características de este proyecto:
 
